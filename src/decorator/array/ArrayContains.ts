@@ -8,6 +8,11 @@ export const ARRAY_CONTAINS = 'arrayContains';
  * If null or undefined is given then this function returns false.
  */
 export function arrayContains(array: unknown, values: any[]): boolean {
+  // Support both Arrays and ES6 Sets as collection types.
+  if (array instanceof Set) {
+    return values.every(value => array.has(value));
+  }
+
   if (!Array.isArray(array)) return false;
 
   return values.every(value => array.indexOf(value) !== -1);

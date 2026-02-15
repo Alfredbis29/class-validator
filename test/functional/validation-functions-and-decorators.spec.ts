@@ -4370,6 +4370,11 @@ describe('ArrayContains', () => {
     invalidValues.forEach(value => expect(arrayContains(value, constraint)).toBeFalsy());
   });
 
+  it('should support Set collections in the plain function', () => {
+    expect(arrayContains(new Set(['world', 'superman', 'hello']), constraint)).toBeTruthy();
+    expect(arrayContains(new Set(['world', 'hello']), constraint)).toBeFalsy();
+  });
+
   it('should return error object with proper data', () => {
     const validationType = 'arrayContains';
     const message = 'someProperty must contain ' + constraintToString(constraint) + ' values';
